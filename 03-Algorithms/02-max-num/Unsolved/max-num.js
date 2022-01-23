@@ -1,3 +1,5 @@
 // Write code to return the largest number in the given array
 
-var maxNum = function(arr) {};
+let maxNum = function(arr) {
+    return Math.max(...arr)
+};
