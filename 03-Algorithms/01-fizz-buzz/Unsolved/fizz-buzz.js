@@ -7,7 +7,7 @@
 let fizzBuzz = function(arr) {
     for(let i = 0; i < arr.length; i++) {
         if (arr[i] % 3 === 0 && arr[i] % 5 === 0) {
-            console.log("FizzBuzz");
+            console.log("Fizz Buzz");
         } else if(arr[i] % 3 === 0) {
             console.log("Fizz")
         } else if(arr[i] % 5 === 0) {
