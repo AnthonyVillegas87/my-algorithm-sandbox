@@ -93,13 +93,25 @@ function sameFrequency(num1, num2) {
 
 }
 
+// console.log(sameFrequency(181, 811));
+// console.log(sameFrequency(34, 14));
+// console.log(sameFrequency(182, 281));
+// console.log(sameFrequency(3589578, 5879385));
+// console.log(sameFrequency(22, 222));
+
+function areThereDuplicates(x, y, z) {
+    let collection = {}
+    for(let val in arguments){
+        collection[arguments[val]] = (collection[arguments[val]] || 0) + 1
+    }
+    for(let key in collection){
+        if(collection[key] > 1) return true
+    }
+    return false;
+
+}
 
 
-console.log(sameFrequency(181, 811));
-console.log(sameFrequency(34, 14));
-console.log(sameFrequency(182, 281));
-console.log(sameFrequency(3589578, 5879385));
-console.log(sameFrequency(22, 222));
-// console.log()
-// console.log()
-// console.log()
+ console.log(areThereDuplicates(1, 2, 3))
+ console.log(areThereDuplicates(1, 2, 2))
+ console.log(areThereDuplicates('a', 'b', 'c', 'a'))
