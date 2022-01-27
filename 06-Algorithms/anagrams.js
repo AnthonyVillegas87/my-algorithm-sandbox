@@ -52,11 +52,54 @@ function validAnagram(str1, str2) {
 
 }
 
+/*
+create a function called sameFrequency. Given two positive integers, find out if the two numbers have the same frequency digits
 
-console.log(validAnagram('', '') )   //true
-console.log(validAnagram('aaz', 'zza')) //false
-console.log(validAnagram('anagram', 'nagaram')) //true
-console.log(validAnagram('rat', 'car')) //false
-console.log(validAnagram('awesome', 'awesom') )//false
-console.log(validAnagram('qwerty', 'qeywrt')) //true
-console.log(validAnagram('texttwisttime', 'timetwisttext')) //true
+SOLUTION MUST HAVE THE FOLLOWING COMPLEXITIES:   TIME: O(N)
+ */
+function sameFrequency(num1, num2) {
+
+    let digits1 = num1.toString();
+    let digits2 = num2.toString();
+    //set edge case if either frequency is not the same length, return false
+    if (digits1.length !== digits2.length) {
+        return false;
+    }
+
+
+
+    let counterOne = {};
+    let counterTwo = {};
+   for(let i = 0; i < digits1.length; i++) {
+       //if the number exists, increment , otherwise set up to 1
+       counterOne[digits1[i]] = (counterOne[digits1[i]] || 0) + 1
+   }
+
+    //iterate through the second frequency of number
+    for(let j = 0; j < digits2.length; j++) {
+       counterTwo[digits2[j]] = (counterTwo[digits2[j]] || 0) + 1
+    }
+
+    for(let key in counterOne) {
+
+        if(counterOne[key] !== counterTwo[key]) {
+            return false;
+        }
+    }
+
+    return true
+
+
+
+}
+
+
+
+console.log(sameFrequency(181, 811));
+console.log(sameFrequency(34, 14));
+console.log(sameFrequency(182, 281));
+console.log(sameFrequency(3589578, 5879385));
+console.log(sameFrequency(22, 222));
+// console.log()
+// console.log()
+// console.log()
