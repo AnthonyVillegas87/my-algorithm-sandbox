@@ -108,13 +108,16 @@ of them all.
 
 function productOfArray(arr) {
     let result = [];
+    if(arr.length === 0) return 1;
+    // result = arr.reduce((prev, curr) => {
+    //
+    //     return prev * curr
+    // })
+    //
+    // return result
 
-    result = arr.reduce((prev, curr) => {
-        if(arr.length === 0) return 1;
-        return prev * curr
-    })
 
-    return result
+    return arr[0] * productOfArray(arr.slice(1));
 }
 
 /*
