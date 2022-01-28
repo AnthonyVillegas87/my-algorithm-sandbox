@@ -84,4 +84,38 @@ function power(base, exponent) {
 
     return base * power(base, exponent - 1)
 }
-power(2, 2)
+
+
+
+/*
+Write a function factorial which accepts a number and returns the factorial of that number.
+A factorial is the product of an integer and all the integers below it; e.g., factorial(4!) is
+equal to 24 because 4 * 3 * 2 * 1 equals 24. factorial (0!) is always 1
+ */
+
+function factorialNum(num) {
+
+
+    if(num === 0) return 1
+
+    return num * factorialNum(num - 1)
+}
+
+/*
+Write a function called productOfArray which takes in an array of numbers and returns the product
+of them all.
+ */
+
+function productOfArray(arr) {
+    let result = [];
+
+    result = arr.reduce((prev, curr) => {
+        if(arr.length === 0) return 1;
+        return prev * curr
+    })
+
+    return result
+}
+
+/*
+ */
