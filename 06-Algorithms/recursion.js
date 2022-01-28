@@ -127,3 +127,15 @@ function recursiveRange(num) {
 
     return num + recursiveRange(num - 1)
 }
+/*
+Write a recursive function called fib which accepts a number and return the nth number in the fibonacci
+sequence. Recall that the fibonacci sequence of whole numbers 1, 1, 2, 3, 5, 8 ...which starts
+with 1 abd 1, and every number thereafter is equal to the sum of the previous two numbers
+ */
+
+function fib(num) {
+    if(num === 0) return 0;
+    if(num === 1 || num === 2) return 1
+
+    return fib(num - 1) + fib(num - 2)
+}
