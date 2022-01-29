@@ -4,7 +4,7 @@ In this activity you will be writing code to create a function that accepts a st
 
 ## Instructions
 
-* Open [Unsolved/is-numeric.js](Unsolved/is-numeric.js) in your code editor -- **this is the only file you will modify in this activity.**
+* Open [Unsolved/is-numeric.js](is-numeric.js) in your code editor -- **this is the only file you will modify in this activity.**
 
   * In this file you will be writing code in the body of the `isNumeric` function to achieve the following:
 
@@ -38,7 +38,7 @@ In this activity you will be writing code to create a function that accepts a st
 
     * Implicit type conversion is also not allowed. I.e. using arithmetic or comparison operators on the given string such as `-`, `+`, `<`, `>`, etc.
 
-* You can check to see if your function works properly by opening [Unsolved/test.html](Unsolved/test.html) in your web browser.
+* You can check to see if your function works properly by opening [Unsolved/test.html](test.html) in your web browser.
 
   * Functions that _pass_ the tests will be denoted with a **green check mark**.
 
