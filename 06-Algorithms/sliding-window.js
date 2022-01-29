@@ -9,7 +9,7 @@ function maxSubArraySum(arr, num) {
    let sum = 0;
 
    //edge case for arr length larger than given window total
-    if(arr.length < num) return null
+   // if(arr.length < num) return null
    //find initial sum of first num elements
     for(let i = 0; i < num; i++) {
         sum += arr[i]
@@ -25,6 +25,7 @@ function maxSubArraySum(arr, num) {
     }
     return max;
 }
+
 
 console.log(maxSubArraySum([100, 200, 300, 400],2))     //700
 console.log(maxSubArraySum([1, 4, 2, 10, 23, 3, 1, 0, 20] ,4)) //39
