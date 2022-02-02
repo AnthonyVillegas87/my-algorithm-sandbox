@@ -100,17 +100,30 @@ class SinglyLinkedList {
 
     //insert method to add a node to the linked list at a specific position
     insert(index, val) {
-        if(index < 0 || index > this.length) return false;
-        if(index === this.length) return this.push(val);
-        if(index === 0) return this.unshift(val);
+        if (index < 0 || index > this.length) return false;
+        if (index === this.length) return this.push(val);
+        if (index === 0) return this.unshift(val);
         let newNode = new Node(val);
         let temp = prev.next;
-       let prev = this.get(index - 1);
-       prev.next = newNode;
-       newNode.next = temp;
-       this.length++;
-       return true;
+        let prev = this.get(index - 1);
+        prev.next = newNode;
+        newNode.next = temp;
+        this.length++;
+        return true;
+    }
 
+    //REMOVE METHOD TO REMOVE A NODE FROM THE LINKED LIST AT A SPECIFIC POSITION
+    remove(index) {
+        if(index < 0 || index > this.length) return undefined;
+        if(index === this.length - 1) return this.pop(index);
+        if(index === 0) return this.shift();
+        let prevNode = this.get(index - 1);
+        let removed = prevNode.next;
+        prevNode.next = removed.next;
+        this.length--;
+        return removed;
+
+    }
 }
 
 let list = new SinglyLinkedList()
