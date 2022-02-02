@@ -86,6 +86,31 @@ class SinglyLinkedList {
        }
        return current
     }
+
+    //Set method to change the value of a node based on its position in the Linked List
+    set(index, val) {
+        let node = this.get(index)
+       if(node) {
+           node.val = val;
+           return true
+       }
+       return false;
+
+    }
+
+    //insert method to add a node to the linked list at a specific position
+    insert(index, val) {
+        if(index < 0 || index > this.length) return false;
+        if(index === this.length) return this.push(val);
+        if(index === 0) return this.unshift(val);
+        let newNode = new Node(val);
+        let temp = prev.next;
+       let prev = this.get(index - 1);
+       prev.next = newNode;
+       newNode.next = temp;
+       this.length++;
+       return true;
+
 }
 
 let list = new SinglyLinkedList()
