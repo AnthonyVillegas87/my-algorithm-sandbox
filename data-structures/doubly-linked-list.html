@@ -47,6 +47,30 @@ class DoublyLinkedList {
 
     }
 
+    //removing a node from the end of the DLL
+    pop() {
+        //if there is no head, return undefined
+        if(!this.head) return undefined;
+        //Store the current tail in a variable to return later
+        let poppedNode = this.tail;
+        //If the length is 1, set the head & tail to be null
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            //Update the tail to be the previous Node
+            this.tail = poppedNode.prev;
+            //Set the newTail's next to Null
+            this.tail.next = null;
+            //Take the old tail, set it to Null to sever connection
+            poppedNode.pev = null;
+        }
+        //Decrement the length
+        this.length--
+        //Return the value removed
+        return poppedNode
+    }
+
 }
 
 
