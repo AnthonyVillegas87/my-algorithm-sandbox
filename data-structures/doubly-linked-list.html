@@ -71,6 +71,29 @@ class DoublyLinkedList {
         return poppedNode
     }
 
+    //removing a node from the beginning of the DLL
+    shift() {
+        //If the length is 0, return undefined
+        if(this.length === 0) return undefined;
+        //Store the current head property in a variable(old head value)
+        let shiftedNode = this.head;
+        //If the length is one(set the head to be null) & (set the tail to be null)
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            //Update the head to be the next of the old head.
+            this.head = shiftedNode.next;
+            //Set the head's prev property to null
+            this.head.prev = null;
+            //Set the old head's next value to null
+            shiftedNode.next = null;
+        }
+        //Decrement the length
+        this.length--;
+        //Return old head
+        return shiftedNode;
+    }
 }
 
 
