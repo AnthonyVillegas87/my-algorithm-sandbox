@@ -94,6 +94,70 @@ class DoublyLinkedList {
         //Return old head
         return shiftedNode;
     }
+    //adding a node to the beginning of a DLL
+    unshift(val) {
+        //Create a new node with the value that's passed in
+        let newNode = new Node(val);
+        //If the length is 0 (set the head to be the new node) & (set the tail to be the new node)
+        if(this.length === 0) {
+            this.head = newNode;
+            this.tail = newNode;
+            //Otherwise (set the prev property on the head of the list to be the new node) & (set property on the new node to be the head property) & (update the head to be the new node)
+        } else {
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+
+        }
+        //Increment the length
+        this.length++;
+        //Return the list
+        return this;
+
+    }
+    //accessing a node in a Doubly Linked List by its position
+    get(index) {
+        //If the index is less than 0 or greater or equal to the length, return null
+        let count, current;
+        if(index < 0 || index >= this.length) return null;
+        //If the index is less than or equal to half the length of the list(loop through the list starting from the head and loop towards the middle) & (return the node once its found)
+        if(index <= this.length / 2) {
+             count = 0;
+             current = this.head;
+            while(count !== index) {
+                current = current.next;
+                count++
+            }
+            return current;
+
+        } else {
+            //If the index is greater than half the length of the list(loop through the list starting from the tail and loop towards the middle) & (return the node once its found)
+
+             count = this.length - 1;
+             current = this.tail;
+            while(count !== index) {
+                current = current.prev;
+                count--;
+            }
+
+        }
+        return current
+
+    }
+
+    //replacing the value of a node in a DLL
+    set(index, val) {
+        //Create a variable which is the result of the get method at the index passed to the function (if the get method returns a valid node, set the value of that node to eb the value passed to the function) & (return true)
+        let node = this.get(index);
+        if(node !== null) {
+            node.val = val;
+            return true;
+        }
+        //Otherwise return false
+        return false;
+    }
+
+
 }
 
 
