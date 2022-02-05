@@ -145,7 +145,17 @@ class DoublyLinkedList {
 
     }
 
-
+    //replacing the value of a node in a DLL
+    set(index, val) {
+        //Create a variable which is the result of the get method at the index passed to the function (if the get method returns a valid node, set the value of that node to eb the value passed to the function) & (return true)
+        let node = this.get(index);
+        if(node !== null) {
+            node.val = val;
+            return true;
+        }
+        //Otherwise return false
+        return false;
+    }
 
 
 }
