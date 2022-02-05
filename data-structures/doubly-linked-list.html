@@ -115,6 +115,35 @@ class DoublyLinkedList {
         return this;
 
     }
+    //accessing a node in a Doubly Linked List by its position
+    get(index) {
+        //If the index is less than 0 or greater or equal to the length, return null
+        let count, current;
+        if(index < 0 || index >= this.length) return null;
+        //If the index is less than or equal to half the length of the list(loop through the list starting from the head and loop towards the middle) & (return the node once its found)
+        if(index <= this.length / 2) {
+             count = 0;
+             current = this.head;
+            while(count !== index) {
+                current = current.next;
+                count++
+            }
+            return current;
+
+        } else {
+            //If the index is greater than half the length of the list(loop through the list starting from the tail and loop towards the middle) & (return the node once its found)
+
+             count = this.length - 1;
+             current = this.tail;
+            while(count !== index) {
+                current = current.prev;
+                count--;
+            }
+
+        }
+        return current
+
+    }
 
 
 
