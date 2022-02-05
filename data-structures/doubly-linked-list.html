@@ -156,7 +156,33 @@ class DoublyLinkedList {
         //Otherwise return false
         return false;
     }
+    //adding a node in a DLL by a certain position
+    insert(index, val) {
+        //If the index is less than zero or greater than or equal to the length return false
+        if(index < 0 || index > this.length) return false;
+        //If the index is 0, unshift
+        if(index === 0) return this.unshift(val);
+        //If the index is the same as the length, push
+        if(index === this.length) return this.push(val);
+        //Use the get method to access the index - 1
+        let newNode = new Node(val);
+        let beforeNode = this.get(index - 1);
+        let afterNode = beforeNode.next;
+        //Set the next and prev properties on the correct nodes to link everything together
 
+        //Set the node before the next node to the new node passed in
+        beforeNode.next = newNode;
+        //Set the connection of the new node to the prev node once inserted
+        newNode.prev = beforeNode;
+        //Set the connection of the new node passed in to the node after it
+        newNode.next = afterNode;
+        //Set the connection to the node after the new node passed in
+        afterNode.prev = newNode;
+        //Increment the length
+        this.length++;
+        //Return true
+        return true;
+    }
 
 }
 
