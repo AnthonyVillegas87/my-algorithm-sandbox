@@ -94,6 +94,31 @@ class DoublyLinkedList {
         //Return old head
         return shiftedNode;
     }
+    //adding a node to the beginning of a DLL
+    unshift(val) {
+        //Create a new node with the value that's passed in
+        let newNode = new Node(val);
+        //If the length is 0 (set the head to be the new node) & (set the tail to be the new node)
+        if(this.length === 0) {
+            this.head = newNode;
+            this.tail = newNode;
+            //Otherwise (set the prev property on the head of the list to be the new node) & (set property on the new node to be the head property) & (update the head to be the new node)
+        } else {
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+
+        }
+        //Increment the length
+        this.length++;
+        //Return the list
+        return this;
+
+    }
+
+
+
+
 }
 
 
