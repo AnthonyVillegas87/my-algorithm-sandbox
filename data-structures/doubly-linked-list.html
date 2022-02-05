@@ -183,6 +183,30 @@ class DoublyLinkedList {
         //Return true
         return true;
     }
+    //remove a node from DLL by a certain position
+    remove(index) {
+        //If the index is less than zero or greater than or equal to the length return undefined
+        if(index < 0 || index >= this.length) return undefined;
+        //If the index is 0, shift
+        if(index === 0) return this.shift();
+        //If the index is the same as the length - 1, pop
+        if(index === this.length - 1) return this.pop();
+        //Use the get method to retrieve the item being removed
+        let removedNode = this.get(index);
+
+        //Update the next & prev properties to remove the found node from the list
+        //Set the connection of the prev node to replace the node being removed
+        removedNode.prev.next = removedNode.next;
+        //Set the connection of the node after the node being removed to the prev node in the DLL
+        removedNode.next.prev = removedNode.prev;
+        //Set the next & prev to null on the found node
+        removedNode.next = null;
+        removedNode.prev = null;
+        //Decrement the length
+        this.length--;
+        //Return the removed node
+        return removedNode;
+    }
 
 }
 
