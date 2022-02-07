@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stacks & Queues</title>
+</head>
+<body>
+
+
+<script>
+
+
+    ////======================= STACK CLASS
+    class Node {
+        constructor(value) {
+            this.value = value;
+            this.next = null;
+        }
+
+
+    }
+
+
+class Stack {
+    constructor() {
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+    //push method to insert value to the stack. The function should accept a value
+    push(value) {
+        //Create a node with that value
+        let newNode = new Node(value);
+        //If there are no nodes in the stack, set the first and last property to be the newly created node
+        if(!this.first) {
+            this.first = newNode;
+            this.last = newNode;
+            //If there is at least one node, create a variable that stores the current first property on the stack
+        } else {
+            let temp = this.first;
+            //Reset the first property to be the newly created node
+            this.first = newNode;
+            //Set the next property on the node to be the previously created variable
+            this.first.next = temp;
+        }
+        //Increment the size of the stack by 1
+        return ++this.size
+    }
+
+    pop() {
+        //If there are no nodes in the stack, return null
+        if(!this.first) return null
+        //Create a temporary variable to store the first property on the stack
+        let temp = this.first;
+        //If there is only one node, set the first and last property to be null
+        if(this.first === this.last) {
+            this.last = null;
+        }
+        //If there is more than one node, set the first property to be the next property on the current first
+        this.first = this.first.next;
+        //Decrement the size by one
+        this.size--;
+        return temp.value;
+    }
+}
+
+/// ========================= QUEUE CLASS
+    class QueNode {
+        constructor(value) {
+            this.value = value;
+            this.next = null;
+        }
+    }
+
+    class Queue {
+        constructor() {
+            this.first = null;
+            this.last = null;
+            this.size = 0;
+        }
+
+        //this method accepts a value and adds it to the end of the list
+        enqueue(value) {
+          //Create a new node using that value passed to the function
+          let newNode = new QueNode(value)
+          //If there are no nodes in the queue, set this node to be the first and last property of the queue
+          if(!this.first) {
+              this.first = newNode;
+              this.last = newNode;
+              //Otherwise, set the next property on the current last to be that node, and then set the last property of the queue to be that node
+          }  else {
+              this.last.next = newNode;
+              this.last = newNode;
+          }
+          //Increment and return the size of the list
+            return ++this.size;
+        }
+
+        //this method removes from the beginning of the list
+        dequeue() {
+            //If there is no first property, just return null
+            if(!this.first) return null
+            //Store the first property in a variable
+            let temp = this.first;
+            //See if the first is the same as the last(check if there is only 1 node). If so, set the first and last to be null
+            if(this.first === this.last) {
+                this.last = null;
+            }
+            this.first = this.first.next;
+            //Decrement the size by one
+            this.size--;
+            //Return the node
+            return temp.value;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
