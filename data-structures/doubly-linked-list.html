@@ -63,7 +63,7 @@ class DoublyLinkedList {
             //Set the newTail's next to Null
             this.tail.next = null;
             //Take the old tail, set it to Null to sever connection
-            poppedNode.pev = null;
+            poppedNode.prev = null;
         }
         //Decrement the length
         this.length--
