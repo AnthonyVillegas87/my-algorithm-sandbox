@@ -32,33 +32,53 @@
        } else {
            //If there is a root, check if the value of the new node is greater than or equal than the value of the root
         let current = this.root;
-        while(true) {
-            if(value === current.value) return undefined;
-            //If it is less (Check to see if there is a node to the left) if there is, move that node & repeat these steps
-            if(value < current.value) {
-                if(current.left === null) {
-                    current.left = newNode;
-                    return this;
-                    //If not, add that node to the left property
-                } else {
-                    current = current.left
-                }
-                //If it is greater (Check to see if there is a node on the right) if there is, move the node & repeat these steps
-            } else if(value > current.value) {
-                if(current.right === null) {
-                    current.right = newNode;
-                    return this;
-                    //If not, add that node as the right property
-                } else {
-                    current = current.right;
+            while(true) {
+                if(value === current.value) return undefined;
+                //If it is less (Check to see if there is a node to the left) if there is, move that node & repeat these steps
+                if(value < current.value) {
+                    if(current.left === null) {
+                        current.left = newNode;
+                        return this;
+                        //If not, add that node to the left property
+                    } else {
+                        current = current.left
+                    }
+                    //If it is greater (Check to see if there is a node on the right) if there is, move the node & repeat these steps
+                } else if(value > current.value) {
+                    if(current.right === null) {
+                        current.right = newNode;
+                        return this;
+                        //If not, add that node as the right property
+                    } else {
+                        current = current.right;
+                    }
                 }
             }
-        }
 
        }
 
-
    }
+
+   find(value) {
+       //Check if there is a root
+       if(this.root === null) return false;
+       let current = this.root;
+       let found = false;
+
+       while(current && !found) {
+           if(value < current.value) {
+               current = current.left;
+           } else if(value > current.value) {
+               current = current.right;
+           } else {
+               found = true;
+           }
+       }
+       if(!found) return undefined;
+       return current;
+   }
+
+
 
 
 
