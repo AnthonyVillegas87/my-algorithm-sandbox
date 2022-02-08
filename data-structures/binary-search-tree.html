@@ -77,6 +77,34 @@
        if(!found) return undefined;
        return current;
    }
+     /// ================  Breadth First Search
+     BFS() {
+         // Create a queue(this can be done iteratively) and a variable to store the values of nodes visited
+        let node = this.root,
+            data = [],
+            queue = [];
+         //Place the root node in the queue
+         queue.push(node)
+         //Loop as long as there is anything in the queue (Dequeue a node from the queue and push the value of the node into the variable that stores the nodes)
+         while(queue.length) {
+             //FIFO
+           node = queue.shift();
+           data.push(node);
+             //If there is a left property on the node dequeued(add it to the queue)
+                if(node.left) queue.push(node.left);
+             //If there is a right property on the node dequeued(add it to the queue)
+                if(node.right) queue.push(node.right);
+         }
+         //Return the variable that stores all of our values
+         return data;
+     }
+
+
+
+
+
+
+
 
 
 
