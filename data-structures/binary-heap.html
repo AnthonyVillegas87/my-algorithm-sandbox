@@ -97,6 +97,104 @@
 
     }
 
+    //=============================================
+    /*
+    Priority Queue
+   * Write a Min Binary Heap - lower number means higher priority
+   * Each node has a value and a priority. Use the priority to build the heap.
+   * Enqueue method accepts a value and priority, makes a new node, and puts it in the right spot based off of its priority
+   * Dequeue method removes root element, returns it, and rearranges heap using priority
+     */
+
+    class PriorityQueue {
+        constructor() {
+            this.values = [];
+        }
+
+        enqueue(value, priority) {
+            let newNode = new Node(value, priority)
+            //Push the value into the value's property on the heap
+            this.values.push(newNode);
+            this.bubbleUp();
+        }
+        bubbleUp() {
+            /*
+         Bubble Up:
+         Create a variable called index which is the length of the value's property - 1;
+         Create a variable called parentIndex which is the floor of (index - 1) / 2;
+          */
+            let index = this.values.length - 1;
+            const element = this.values[index];
+            //Keep looping as long as the value's element at the child parentIndex is less than the value's element at the child index;
+            while(index > 0) {
+                let parentIndex = Math.floor((index - 1) / 2);
+                let parent = this.values[parentIndex];
+                if(element.priority >= parent.priority) break;
+                //Swap the value of the value's element at the parentIndex w/ the value of the element property at the child index;
+                this.values[parentIndex] = element;
+                this.values[index] = parent;
+                //Set the index to be the parentIndex, and start over!!
+                index = parentIndex;
+
+            }
+        }
+
+        dequeue() {
+            //Swap the first value in the value's property w/ the last one
+            const min = this.values[0];
+            //Pop from the value's property, so you can return the value at the end
+            const end = this.values.pop()
+            if (this.values.length > 0) {
+                this.values[0] = end;
+                this.sinkDown()
+            }
+            //Return the old root!
+            return min;
+        }
+        sinkDown() {
+            let index = 0;
+            const length = this.values.length;
+            const element = this.values[0];
+
+            //Keep looping & swapping until neither child is larger than the element.
+            while(true) {
+                let leftChildIndex = 2 * index + 1;
+                let rightChildIndex = 2 * index + 2;
+                let leftChild, rightChild;
+                let swap = null;
+                //If the left or right child is greater than the element...swap. If both left and right children are larger, swap with the largest child
+                if(leftChildIndex < length) {
+                    leftChild = this.values[leftChildIndex];
+
+                    if(leftChild.priority < element.priority) {
+                        swap = leftChildIndex;
+                    }
+                }
+                if(rightChildIndex < length) {
+                    rightChild = this.values[rightChildIndex]
+                    if(
+                        (swap === null && rightChild.priority < element.priority) ||
+                        (swap !== null && rightChild.priority < leftChild.priority)
+                    ) {
+                        swap = rightChildIndex
+                    }
+                }
+                if(swap === null) break;
+                this.values[index] = this.values[swap];
+                this.values[swap] = element;
+                //The child index you swapped to now becomes the new parent index
+                index = swap;
+            }
+        }
+    }
+
+    class Node {
+        constructor(value, priority) {
+            this.value = value;
+            this.priority = priority;
+        }
+    }
+
 
 
 </script>
