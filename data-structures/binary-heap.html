@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binary Heaps Intro</title>
+</head>
+<body>
+
+
+<script>
+    class MaxBinaryHeap {
+        constructor() {
+            this.values = [];
+        }
+
+        insert(element) {
+            //Push the value into the value's property on the heap
+            this.values.push(element);
+            this.bubbleUp();
+        }
+       bubbleUp() {
+               /*
+            Bubble Up:
+            Create a variable called index which is the length of the value's property - 1;
+            Create a variable called parentIndex which is the floor of (index - 1) / 2;
+             */
+            let index = this.values.length - 1;
+            const element = this.values[index];
+           //Keep looping as long as the value's element at the child parentIndex is less than the values element at the child index;
+            while(index > 0) {
+                let parentIndex = Math.floor((index - 1) / 2);
+                let parent = this.values[parentIndex];
+                if(element <= parent) break;
+                //Swap the value of the value's element at the parentIndex w/ the value of the element property at the child index;
+                    this.values[parentIndex] = element;
+                    this.values[index] = parent;
+                //Set the index to be the parentIndex, and start over!!
+                    index = parentIndex;
+
+            }
+       }
+
+    }
+
+
+
+</script>
+</body>
+</html>
