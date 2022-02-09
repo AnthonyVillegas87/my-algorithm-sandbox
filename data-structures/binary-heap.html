@@ -26,7 +26,7 @@
              */
             let index = this.values.length - 1;
             const element = this.values[index];
-           //Keep looping as long as the value's element at the child parentIndex is less than the values element at the child index;
+           //Keep looping as long as the value's element at the child parentIndex is less than the value's element at the child index;
             while(index > 0) {
                 let parentIndex = Math.floor((index - 1) / 2);
                 let parent = this.values[parentIndex];
@@ -39,6 +39,61 @@
 
             }
        }
+
+       extractMax() {
+           //Swap the first value in the value's property w/ the last one
+           const max = this.values[0];
+           //Pop from the value's property, so you can return the value at the end
+           const end = this.values.pop()
+           if(this.values.length > 0) {
+               this.values[0] = end;
+               this.sinkDown()
+           }
+           //Return the old root!
+           return max;
+       }
+        /*
+    Have the new root "sink-down" to the correct spot....
+    Your parent index starts at 0(the root)
+    Find the index of the left child: 2 * index + 1 (make sure it's not out of bounds)
+    Find the index of the right child: 2 * index + 2 (make sure it's not out of bounds)
+     */
+        sinkDown() {
+            let index = 0;
+            const length = this.values.length;
+            const element = this.values[0];
+
+            //Keep looping & swapping until neither child is larger than the element.
+            while(true) {
+                let leftChildIndex = 2 * index + 1;
+                let rightChildIndex = 2 * index + 2;
+                let leftChild, rightChild;
+                let swap = null;
+                //If the left or right child is greater than the element...swap. If both left and right children are larger, swap with the largest child
+                if(leftChildIndex < length) {
+                    leftChild = this.values[leftChildIndex];
+
+                    if(leftChild > element) {
+                        swap = leftChildIndex;
+                    }
+                }
+                if(rightChildIndex < length) {
+                    rightChild = this.values[rightChildIndex]
+                    if(
+                        (swap === null && rightChild > element) ||
+                        (swap !== null && rightChild > leftChild)
+                    ) {
+                        swap = rightChildIndex
+                    }
+                }
+                if(swap === null) break;
+                this.values[index] = this.values[swap];
+                this.values[swap] = element;
+                //The child index you swapped to now becomes the new parent index
+                index = swap;
+            }
+        }
+
 
     }
 
