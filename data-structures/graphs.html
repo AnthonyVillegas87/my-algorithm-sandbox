@@ -23,7 +23,25 @@
         addVertex(vertex) {
             if(!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
         }
+
+        /*
+        * This method needs to accept two vertices, we can call them vertex1 & vertex2
+        * The method should find in the adjacency list the key of vertex1 & push vertex2 to the List(array)
+        * The method should find in the adjacency list the key of the vertex2 & push vertex1 to the array
+        * Don't worry about handling errors/invalid vertices
+         */
+        addEdge(vertex1, vertex2) {
+            this.adjacencyList[vertex1].push(vertex2);
+            this.adjacencyList[vertex2].push(vertex1);
+        }
     }
+
+    let g = new Graph();
+    g.addVertex("Tokyo");
+    g.addVertex("Dallas");
+    g.addVertex("Aspen");
+
+    g.addEdge("Tokyo", "Dallas");
 
 </script>
 </body>
