@@ -34,6 +34,23 @@
             this.adjacencyList[vertex1].push(vertex2);
             this.adjacencyList[vertex2].push(vertex1);
         }
+
+        /*
+        * This method should accept two vertices, we'll call the vertex1 & vertex2
+        * The method should reassign the key of vertex1 to be an array that does not contain vertex2
+        * The method should reassign the key of vertex2 to be an array that does not contain vertex1
+        * Do not worry about error handling
+         */
+        removeEdge(vertex1, vertex2) {
+            //take the current list of vertex1, filter it & keep everything that is not equal to vertex2
+            this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
+                vertex => vertex !== vertex2
+            );
+            //vice versa
+            this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
+                vertex => vertex !== vertex1
+            );
+        }
     }
 
     let g = new Graph();
