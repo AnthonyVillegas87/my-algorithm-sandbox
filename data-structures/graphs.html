@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graphs & Graph Traversal</title>
+</head>
+<body>
+
+
+<script>
+    //Graph class & Intro to Adjacency List
+    //==============  Building an Undirected Graph for simplicity
+
+    class Graph {
+        constructor() {
+           this.adjacencyList = {};
+        }
+        /*
+        * Write a method called addVertex, which accepts a name of a vertex
+        * It should add a key to adjacency list w/ the name of the vertex & set is value to be an empty array
+        * Handle edge case for prevention of overwriting a vertex if already present
+         */
+        addVertex(vertex) {
+            if(!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
+        }
+
+        /*
+        * This method needs to accept two vertices, we can call them vertex1 & vertex2
+        * The method should find in the adjacency list the key of vertex1 & push vertex2 to the List(array)
+        * The method should find in the adjacency list the key of the vertex2 & push vertex1 to the array
+        * Don't worry about handling errors/invalid vertices
+         */
+        addEdge(vertex1, vertex2) {
+            this.adjacencyList[vertex1].push(vertex2);
+            this.adjacencyList[vertex2].push(vertex1);
+        }
+
+        /*
+        * This method should accept two vertices, we'll call the vertex1 & vertex2
+        * The method should reassign the key of vertex1 to be an array that does not contain vertex2
+        * The method should reassign the key of vertex2 to be an array that does not contain vertex1
+        * Do not worry about error handling
+         */
+        removeEdge(vertex1, vertex2) {
+            //take the current list of vertex1, filter it & keep everything that is not equal to vertex2
+            this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
+                vertex => vertex !== vertex2
+            );
+            //vice versa
+            this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
+                vertex => vertex !== vertex1
+            );
+        }
+
+        /*
+        * The method should accept a vertex to remove
+        * The method should loop as long as there are any other vertices in the adjacency list for that vertex
+        * Inside the loop, call the removeEdge function with the vertex we are removing & any values in the adjacency list for the vertex
+        * Delete the key in adjacency list for that vertex
+         */
+        removeVertex(vertex) {
+           while(this.adjacencyList[vertex].length) {
+               const adjacentVertex = this.adjacencyList[vertex].pop();
+               this.removeEdge(vertex, adjacentVertex);
+           }
+           delete this.adjacencyList[vertex];
+        }
+    }
+
+    let g = new Graph();
+    g.addVertex("Tokyo");
+    g.addVertex("Dallas");
+    g.addVertex("Aspen");
+
+    g.addEdge("Tokyo", "Dallas");
+
+</script>
+</body>
+</html>
