@@ -66,7 +66,7 @@
            delete this.adjacencyList[vertex];
         }
         //=================== Graph Traversal Intro : DFS & BFS
-        //DFS Recursive
+        //DFS Recursive Solution
 
         //The method should accept a starting vertex
         dfsRecursive(vertex) {
@@ -99,6 +99,47 @@
 
         }
 
+        /// DFS Iterative Solution
+        //The method should accept a starting vertex
+        dfsIterative(vertex) {
+            //Create a stack to help keep track of vertices(use list/array)
+            const stack = [vertex];
+            //Create a list to store the end result, to be returned to the very end
+            const result = [];
+            //Create an object to store visited vertices
+            const visitedVertices = {};
+            let currentVertex;
+            //Add starting vertex to the stack, & mark it visited
+            visitedVertices[vertex] = true;
+            //While the stack has something in it:
+
+            /*
+            * Pop the next vertex from the stack
+            * If the vertex hasn't been visited yet:
+            * Mark as visited
+            * Add to the result list
+            * Push all of it's neighbors into the stack
+             */
+            while(stack.length) {
+                console.log(stack)
+                currentVertex = stack.pop();
+                result.push(currentVertex);
+
+                this.adjacencyList[currentVertex].forEach(neighbor => {
+                    if(!visitedVertices[neighbor]) {
+                        visitedVertices[neighbor] = true;
+                        stack.push(neighbor);
+                    }
+                })
+            }
+            //Return the result array
+            return result;
+        }
+
+
+
+
+
 
 
 
@@ -120,7 +161,8 @@
     g.addEdge("D", "F");
     g.addEdge("D", "F");
     g.addEdge("E", "F");
-    g.dfsRecursive("A")
+    // g.dfsRecursive("A")
+    g.dfsIterative("A")
 
 
 
