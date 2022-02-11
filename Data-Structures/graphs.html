@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graphs & Graph Traversal</title>
+</head>
+<body>
+
+
+<script>
+    //Graph class & Intro to Adjacency List
+    //==============  Building an Undirected Graph for simplicity
+
+    class Graph {
+        constructor() {
+           this.adjacencyList = {};
+        }
+        /*
+        * Write a method called addVertex, which accepts a name of a vertex
+        * It should add a key to adjacency list w/ the name of the vertex & set is value to be an empty array
+        * Handle edge case for prevention of overwriting a vertex if already present
+         */
+        addVertex(vertex) {
+            if(!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
+        }
+
+        /*
+        * This method needs to accept two vertices, we can call them vertex1 & vertex2
+        * The method should find in the adjacency list the key of vertex1 & push vertex2 to the List(array)
+        * The method should find in the adjacency list the key of the vertex2 & push vertex1 to the array
+        * Don't worry about handling errors/invalid vertices
+         */
+        addEdge(vertex1, vertex2) {
+            this.adjacencyList[vertex1].push(vertex2);
+            this.adjacencyList[vertex2].push(vertex1);
+        }
+
+        /*
+        * This method should accept two vertices, we'll call the vertex1 & vertex2
+        * The method should reassign the key of vertex1 to be an array that does not contain vertex2
+        * The method should reassign the key of vertex2 to be an array that does not contain vertex1
+        * Do not worry about error handling
+         */
+        removeEdge(vertex1, vertex2) {
+            //take the current list of vertex1, filter it & keep everything that is not equal to vertex2
+            this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
+                vertex => vertex !== vertex2
+            );
+            //vice versa
+            this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
+                vertex => vertex !== vertex1
+            );
+        }
+
+        /*
+        * The method should accept a vertex to remove
+        * The method should loop as long as there are any other vertices in the adjacency list for that vertex
+        * Inside the loop, call the removeEdge function with the vertex we are removing & any values in the adjacency list for the vertex
+        * Delete the key in adjacency list for that vertex
+         */
+        removeVertex(vertex) {
+           while(this.adjacencyList[vertex].length) {
+               const adjacentVertex = this.adjacencyList[vertex].pop();
+               this.removeEdge(vertex, adjacentVertex);
+           }
+           delete this.adjacencyList[vertex];
+        }
+        //=================== Graph Traversal Intro : DFS & BFS
+        //DFS Recursive Solution
+
+        //The method should accept a starting vertex
+        dfsRecursive(vertex) {
+            //Create a list to store the end result, to be returned at the end
+                const result = [];
+            //Create an object to store visited vertices
+                const visited = {};
+                const adjacencyList = this.adjacencyList;
+
+            //Create a helper function which accepts a vertex
+            //Invoke the helper function with the starting vertex: IIFE
+            /*
+       * The helper function should return early if the vertex is empty
+       * The helper function should place the vertex it accepts into the visited object & push that vertex into the result array
+       * Loop over the values in the adjacencyList for that vertex
+       * If any of those values have not been visited, recursively invoke the helper function with that vertex
+        */
+            (function dfs(vertex) {
+                if(!vertex) return null
+                visited[vertex] = true;
+                result.push(vertex);
+                adjacencyList[vertex].forEach(neighbor => {
+                    if(!visited[neighbor]) {
+                        return dfs(neighbor);
+                    }
+                })
+            })(vertex)
+            //Return the result array
+            return result;
+
+        }
+
+        /// DFS Iterative Solution
+        //The method should accept a starting vertex
+        dfsIterative(vertex) {
+            //Create a stack to help keep track of vertices(use list/array)
+            const stack = [vertex];
+            //Create a list to store the end result, to be returned to the very end
+            const result = [];
+            //Create an object to store visited vertices
+            const visitedVertices = {};
+            let currentVertex;
+            //Add starting vertex to the stack, & mark it visited
+            visitedVertices[vertex] = true;
+            //While the stack has something in it:
+
+            /*
+            * Pop the next vertex from the stack
+            * If the vertex hasn't been visited yet:
+            * Mark as visited
+            * Add to the result list
+            * Push all of it's neighbors into the stack
+             */
+            while(stack.length) {
+                console.log(stack)
+                currentVertex = stack.pop();
+                result.push(currentVertex);
+
+                this.adjacencyList[currentVertex].forEach(neighbor => {
+                    if(!visitedVertices[neighbor]) {
+                        visitedVertices[neighbor] = true;
+                        stack.push(neighbor);
+                    }
+                })
+            }
+            //Return the result array
+            return result;
+        }
+
+        //BFS Graph Traversal : Prioritize visiting neighbors at the current depth
+
+
+        //The method should accept a starting vertex
+        bfsIterative(vertex) {
+            //Create a queue(you can use an array) & place the starting vertex in it
+            let queue = [vertex]
+            //Create an array to store the nodes visited
+            let result = [];
+            //Create an object to store the nodes visited
+            let visited = {};
+            let currentVertex;
+            //Mark the starting vertex as visited
+           visited[vertex] = true;
+            //Loop as there is anything in queue
+            while(queue.length) {
+                //Remove the first vertex from the queue and push it into the array that stores nodes visited
+                currentVertex = queue.shift();
+                result.push(currentVertex);
+
+                //Loop over each vertex in the adjacency list for the vertex you are visiting
+                this.adjacencyList[currentVertex].forEach(neighbor => {
+                    //If it is not inside the object that stores the nodes visited, mark it as visited and enqueue that vertex
+                    if(!visited[neighbor]) {
+                        visited[neighbor] = true;
+                        queue.push(neighbor);
+                    }
+                });
+            }
+            //Once you have finished looping, return the array of the visited vertices
+            return result;
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+    let g = new Graph();
+    g.addVertex("A");
+    g.addVertex("B");
+    g.addVertex("C");
+    g.addVertex("D");
+    g.addVertex("E");
+    g.addVertex("F");
+
+    g.addEdge("A", "B");
+    g.addEdge("A", "C");
+    g.addEdge("B", "D");
+    g.addEdge("C", "E");
+    g.addEdge("D", "F");
+    g.addEdge("D", "F");
+    g.addEdge("E", "F");
+    // g.dfsRecursive("A")
+    g.dfsIterative("A")
+
+
+
+</script>
+</body>
+</html>
