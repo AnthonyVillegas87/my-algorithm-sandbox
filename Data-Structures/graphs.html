@@ -136,7 +136,43 @@
             return result;
         }
 
+        //BFS Graph Traversal : Prioritize visiting neighbors at the current depth
 
+
+        //The method should accept a starting vertex
+        bfsIterative(vertex) {
+            //Create a queue(you can use an array) & place the starting vertex in it
+            let queue = [vertex]
+            //Create an array to store the nodes visited
+            let result = [];
+            //Create an object to store the nodes visited
+            let visited = {};
+            let currentVertex;
+            //Mark the starting vertex as visited
+           visited[vertex] = true;
+            //Loop as there is anything in queue
+            while(queue.length) {
+                //Remove the first vertex from the queue and push it into the array that stores nodes visited
+                currentVertex = queue.shift();
+                result.push(currentVertex);
+
+                //Loop over each vertex in the adjacency list for the vertex you are visiting
+                this.adjacencyList[currentVertex].forEach(neighbor => {
+                    //If it is not inside the object that stores the nodes visited, mark it as visited and enqueue that vertex
+                    if(!visited[neighbor]) {
+                        visited[neighbor] = true;
+                        queue.push(neighbor);
+                    }
+                });
+            }
+            //Once you have finished looping, return the array of the visited vertices
+            return result;
+
+
+
+
+
+        }
 
 
 
